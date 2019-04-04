@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改文献')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-literature-edit" th:object="${literature}">
+            <input id="literatureId" name="literatureId" th:field="*{literatureId}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">文献标题：</label>
+				<div class="col-sm-8">
+					<input id="literatureTitle" name="literatureTitle" th:field="*{literatureTitle}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">文献类目id：</label>
+				<div class="col-sm-8">
+					<input id="literatureTypeId" name="literatureTypeId" th:field="*{literatureTypeId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">文献作者ID：</label>
+				<div class="col-sm-8">
+					<input id="literatureAuthorId" name="literatureAuthorId" th:field="*{literatureAuthorId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">文献内容：</label>
+				<div class="col-sm-8">
+					<input id="literatureContent" name="literatureContent" th:field="*{literatureContent}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">文献创建时间：</label>
+				<div class="col-sm-8">
+					<input id="literatureCreateTime" name="literatureCreateTime" th:field="*{literatureCreateTime}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">文献状态：</label>
+				<div class="col-sm-8">
+					<input id="literatureStatus" name="literatureStatus" th:field="*{literatureStatus}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "lms/literature";
+		$("#form-literature-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-literature-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

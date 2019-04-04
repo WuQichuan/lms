@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.literaturetype.mapper.LiteraturetypeMapper">
+    
+    <resultMap type="Literaturetype" id="LiteraturetypeResult">
+        <result property="typeId"    column="typeId"    />
+        <result property="typeName"    column="typeName"    />
+        <result property="typeCreateTime"    column="typeCreateTime"    />
+    </resultMap>
+	
+	<sql id="selectLiteraturetypeVo">
+        select typeId, typeName, typeCreateTime from tb_literaturetype
+    </sql>
+	
+    <select id="selectLiteraturetypeList" parameterType="Literaturetype" resultMap="LiteraturetypeResult">
+        <include refid="selectLiteraturetypeVo"/>
+        <where>  
+            <if test="typeId != null "> and typeId = #{typeId}</if>
+             <if test="typeName != null  and typeName != '' "> and typeName = #{typeName}</if>
+             <if test="typeCreateTime != null "> and typeCreateTime = #{typeCreateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectLiteraturetypeById" parameterType="Integer" resultMap="LiteraturetypeResult">
+        <include refid="selectLiteraturetypeVo"/>
+        where typeId = #{typeId}
+    </select>
+        
+    <insert id="insertLiteraturetype" parameterType="Literaturetype" useGeneratedKeys="true" keyProperty="typeId">
+        insert into tb_literaturetype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="typeName != null  and typeName != ''  ">typeName,</if>
+			<if test="typeCreateTime != null  ">typeCreateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="typeName != null  and typeName != ''  ">#{typeName},</if>
+			<if test="typeCreateTime != null  ">#{typeCreateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateLiteraturetype" parameterType="Literaturetype">
+        update tb_literaturetype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null  and typeName != ''  ">typeName = #{typeName},</if>
+            <if test="typeCreateTime != null  ">typeCreateTime = #{typeCreateTime},</if>
+        </trim>
+        where typeId = #{typeId}
+    </update>
+
+	<delete id="deleteLiteraturetypeById" parameterType="Integer">
+        delete from tb_literaturetype where typeId = #{typeId}
+    </delete>
+	
+    <delete id="deleteLiteraturetypeByIds" parameterType="String">
+        delete from tb_literaturetype where typeId in 
+        <foreach item="typeId" collection="array" open="(" separator="," close=")">
+            #{typeId}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.literature.mapper.LiteratureMapper">
+    
+    <resultMap type="Literature" id="LiteratureResult">
+        <result property="literatureId"    column="literatureId"    />
+        <result property="literatureTitle"    column="literatureTitle"    />
+        <result property="literatureTypeId"    column="literatureTypeId"    />
+        <result property="literatureAuthorId"    column="literatureAuthorId"    />
+        <result property="literatureContent"    column="literatureContent"    />
+        <result property="literatureCreateTime"    column="literatureCreateTime"    />
+        <result property="literatureStatus"    column="literatureStatus"    />
+    </resultMap>
+	
+	<sql id="selectLiteratureVo">
+        select literatureId, literatureTitle, literatureTypeId, literatureAuthorId, literatureContent, literatureCreateTime, literatureStatus from tb_literature
+    </sql>
+	
+    <select id="selectLiteratureList" parameterType="Literature" resultMap="LiteratureResult">
+        <include refid="selectLiteratureVo"/>
+        <where>  
+            <if test="literatureId != null "> and literatureId = #{literatureId}</if>
+             <if test="literatureTitle != null  and literatureTitle != '' "> and literatureTitle = #{literatureTitle}</if>
+             <if test="literatureTypeId != null "> and literatureTypeId = #{literatureTypeId}</if>
+             <if test="literatureAuthorId != null "> and literatureAuthorId = #{literatureAuthorId}</if>
+             <if test="literatureContent != null  and literatureContent != '' "> and literatureContent = #{literatureContent}</if>
+             <if test="literatureCreateTime != null "> and literatureCreateTime = #{literatureCreateTime}</if>
+             <if test="literatureStatus != null "> and literatureStatus = #{literatureStatus}</if>
+         </where>
+    </select>
+    
+    <select id="selectLiteratureById" parameterType="Integer" resultMap="LiteratureResult">
+        <include refid="selectLiteratureVo"/>
+        where literatureId = #{literatureId}
+    </select>
+        
+    <insert id="insertLiterature" parameterType="Literature" useGeneratedKeys="true" keyProperty="literatureId">
+        insert into tb_literature
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="literatureTitle != null  and literatureTitle != ''  ">literatureTitle,</if>
+			<if test="literatureTypeId != null  ">literatureTypeId,</if>
+			<if test="literatureAuthorId != null  ">literatureAuthorId,</if>
+			<if test="literatureContent != null  and literatureContent != ''  ">literatureContent,</if>
+			<if test="literatureCreateTime != null  ">literatureCreateTime,</if>
+			<if test="literatureStatus != null  ">literatureStatus,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="literatureTitle != null  and literatureTitle != ''  ">#{literatureTitle},</if>
+			<if test="literatureTypeId != null  ">#{literatureTypeId},</if>
+			<if test="literatureAuthorId != null  ">#{literatureAuthorId},</if>
+			<if test="literatureContent != null  and literatureContent != ''  ">#{literatureContent},</if>
+			<if test="literatureCreateTime != null  ">#{literatureCreateTime},</if>
+			<if test="literatureStatus != null  ">#{literatureStatus},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateLiterature" parameterType="Literature">
+        update tb_literature
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="literatureTitle != null  and literatureTitle != ''  ">literatureTitle = #{literatureTitle},</if>
+            <if test="literatureTypeId != null  ">literatureTypeId = #{literatureTypeId},</if>
+            <if test="literatureAuthorId != null  ">literatureAuthorId = #{literatureAuthorId},</if>
+            <if test="literatureContent != null  and literatureContent != ''  ">literatureContent = #{literatureContent},</if>
+            <if test="literatureCreateTime != null  ">literatureCreateTime = #{literatureCreateTime},</if>
+            <if test="literatureStatus != null  ">literatureStatus = #{literatureStatus},</if>
+        </trim>
+        where literatureId = #{literatureId}
+    </update>
+
+	<delete id="deleteLiteratureById" parameterType="Integer">
+        delete from tb_literature where literatureId = #{literatureId}
+    </delete>
+	
+    <delete id="deleteLiteratureByIds" parameterType="String">
+        delete from tb_literature where literatureId in 
+        <foreach item="literatureId" collection="array" open="(" separator="," close=")">
+            #{literatureId}
+        </foreach>
+    </delete>
+    
+</mapper>

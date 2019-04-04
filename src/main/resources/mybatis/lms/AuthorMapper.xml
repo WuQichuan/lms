@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.author.mapper.AuthorMapper">
+    
+    <resultMap type="Author" id="AuthorResult">
+        <result property="authorId"    column="authorId"    />
+        <result property="authorName"    column="authorName"    />
+        <result property="anthorSynopsis"    column="anthorSynopsis"    />
+        <result property="authorCreateTime"    column="authorCreateTime"    />
+    </resultMap>
+	
+	<sql id="selectAuthorVo">
+        select authorId, authorName, anthorSynopsis, authorCreateTime from tb_author
+    </sql>
+	
+    <select id="selectAuthorList" parameterType="Author" resultMap="AuthorResult">
+        <include refid="selectAuthorVo"/>
+        <where>  
+            <if test="authorId != null "> and authorId = #{authorId}</if>
+             <if test="authorName != null  and authorName != '' "> and authorName = #{authorName}</if>
+             <if test="anthorSynopsis != null  and anthorSynopsis != '' "> and anthorSynopsis = #{anthorSynopsis}</if>
+             <if test="authorCreateTime != null "> and authorCreateTime = #{authorCreateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectAuthorById" parameterType="Integer" resultMap="AuthorResult">
+        <include refid="selectAuthorVo"/>
+        where authorId = #{authorId}
+    </select>
+        
+    <insert id="insertAuthor" parameterType="Author" useGeneratedKeys="true" keyProperty="authorId">
+        insert into tb_author
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="authorName != null  and authorName != ''  ">authorName,</if>
+			<if test="anthorSynopsis != null  and anthorSynopsis != ''  ">anthorSynopsis,</if>
+			<if test="authorCreateTime != null  ">authorCreateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="authorName != null  and authorName != ''  ">#{authorName},</if>
+			<if test="anthorSynopsis != null  and anthorSynopsis != ''  ">#{anthorSynopsis},</if>
+			<if test="authorCreateTime != null  ">#{authorCreateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateAuthor" parameterType="Author">
+        update tb_author
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="authorName != null  and authorName != ''  ">authorName = #{authorName},</if>
+            <if test="anthorSynopsis != null  and anthorSynopsis != ''  ">anthorSynopsis = #{anthorSynopsis},</if>
+            <if test="authorCreateTime != null  ">authorCreateTime = #{authorCreateTime},</if>
+        </trim>
+        where authorId = #{authorId}
+    </update>
+
+	<delete id="deleteAuthorById" parameterType="Integer">
+        delete from tb_author where authorId = #{authorId}
+    </delete>
+	
+    <delete id="deleteAuthorByIds" parameterType="String">
+        delete from tb_author where authorId in 
+        <foreach item="authorId" collection="array" open="(" separator="," close=")">
+            #{authorId}
+        </foreach>
+    </delete>
+    
+</mapper>
