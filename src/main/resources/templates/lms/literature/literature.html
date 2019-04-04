@@ -15,11 +15,11 @@
 							</li>
 
 							<li>
-								文献类目id：<input type="text" name="literatureTypeId"/>
+								文献类目：<input type="text" name="typeName"/>
 							</li>
 
 							<li>
-								文献作者ID：<input type="text" name="literatureAuthorId"/>
+								文献作者：<input type="text" name="authorName"/>
 							</li>
 
 							<li>
@@ -27,7 +27,8 @@
 							</li>
 
 							<li>
-								文献创建时间：<input type="text" name="literatureCreateTime"/>
+								文献创建时间：
+								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="literatureCreateTime"/>
 							</li>
 
 							<li>
@@ -81,23 +82,18 @@
 		            checkbox: true
 		        },
 				{
-					field : 'literatureId', 
-					title : '文献ID',
-					visible: false
-				},
-				{
 					field : 'literatureTitle', 
 					title : '文献标题',
 					sortable: true
 				},
 				{
-					field : 'literatureTypeId', 
-					title : '文献类目id',
+					field : 'typeName',
+					title : '文献类目',
 					sortable: true
 				},
 				{
-					field : 'literatureAuthorId', 
-					title : '文献作者ID',
+					field : 'authorName',
+					title : '文献作者',
 					sortable: true
 				},
 				{

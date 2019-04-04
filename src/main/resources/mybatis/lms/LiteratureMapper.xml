@@ -12,10 +12,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="literatureContent"    column="literatureContent"    />
         <result property="literatureCreateTime"    column="literatureCreateTime"    />
         <result property="literatureStatus"    column="literatureStatus"    />
+        <result property="typeName"    column="typeName"    />
+        <result property="authorName"    column="authorName"    />
     </resultMap>
 	
 	<sql id="selectLiteratureVo">
-        select literatureId, literatureTitle, literatureTypeId, literatureAuthorId, literatureContent, literatureCreateTime, literatureStatus from tb_literature
+        select
+            literatureId,
+            literatureTitle,
+            literatureTypeId,
+            literatureAuthorId,
+            literatureContent,
+            literatureCreateTime,
+            literatureStatus ,
+            typeName,
+            authorName
+            from tb_literature
+            INNER JOIN tb_literatureType ON tb_literature.literatureTypeId = tb_literatureType.typeId
+            INNER JOIN tb_author ON tb_literature.literatureAuthorId = tb_author.authorId
     </sql>
 	
     <select id="selectLiteratureList" parameterType="Literature" resultMap="LiteratureResult">
@@ -26,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="literatureTypeId != null "> and literatureTypeId = #{literatureTypeId}</if>
              <if test="literatureAuthorId != null "> and literatureAuthorId = #{literatureAuthorId}</if>
              <if test="literatureContent != null  and literatureContent != '' "> and literatureContent = #{literatureContent}</if>
-             <if test="literatureCreateTime != null "> and literatureCreateTime = #{literatureCreateTime}</if>
+             <if test="literatureCreateTime != null "> and literatureCreateTime like CONCAT('%',#{literatureCreateTime},'%')</if>
              <if test="literatureStatus != null "> and literatureStatus = #{literatureStatus}</if>
          </where>
     </select>

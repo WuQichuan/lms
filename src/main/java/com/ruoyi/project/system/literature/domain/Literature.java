@@ -4,6 +4,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.beans.Transient;
 import java.util.Date;
 
 /**
@@ -30,6 +31,13 @@ public class Literature extends BaseEntity
 	private Date literatureCreateTime;
 	/** 文献状态 */
 	private Integer literatureStatus;
+
+	//以下为查询使用的冗余字段
+	/** 文献类目名称 */
+	private String typeName;
+	/** 作者名称 */
+	private String authorName;
+
 
 	public void setLiteratureId(Integer literatureId) 
 	{
@@ -95,7 +103,23 @@ public class Literature extends BaseEntity
 		return literatureStatus;
 	}
 
-    public String toString() {
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("literatureId", getLiteratureId())
             .append("literatureTitle", getLiteratureTitle())
