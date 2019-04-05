@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="literatureTitle != null  and literatureTitle != '' "> and literatureTitle = #{literatureTitle}</if>
              <if test="literatureTypeId != null "> and literatureTypeId = #{literatureTypeId}</if>
              <if test="literatureAuthorId != null "> and literatureAuthorId = #{literatureAuthorId}</if>
-             <if test="literatureContent != null  and literatureContent != '' "> and literatureContent = #{literatureContent}</if>
+             <if test="literatureContent != null  and literatureContent != '' "> and literatureContent like CONCAT('%',#{literatureContent},'%')</if>
              <if test="literatureCreateTime != null "> and literatureCreateTime like CONCAT('%',#{literatureCreateTime},'%')</if>
              <if test="literatureStatus != null "> and literatureStatus = #{literatureStatus}</if>
          </where>

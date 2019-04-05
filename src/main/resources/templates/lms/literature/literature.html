@@ -15,21 +15,29 @@
 							</li>
 
 							<li>
-								文献类目：<input type="text" name="typeName"/>
+								文献类目：
+								<select name="literatureTypeId" >
+									<option value="">所有</option>
+									<option th:each="literaturetype : ${literaturetype}" th:text="${literaturetype.typeName}" th:value="${literaturetype.typeId}"></option>
+								</select>
 							</li>
 
 							<li>
-								文献作者：<input type="text" name="authorName"/>
+								文献作者：
+								<select name="literatureAuthorId" >
+									<option value="">所有</option>
+									<option th:each="author : ${author}" th:text="${author.authorName}" th:value="${author.authorId}"></option>
+								</select>
 							</li>
 
 							<li>
 								文献内容：<input type="text" name="literatureContent"/>
 							</li>
 
-							<li>
+							<!--<li>
 								文献创建时间：
 								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="literatureCreateTime"/>
-							</li>
+							</li>-->
 
 							<li>
 								文献状态：<input type="text" name="literatureStatus"/>

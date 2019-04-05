@@ -13,15 +13,19 @@
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">文献类目id：</label>
-				<div class="col-sm-8">
-					<input id="literatureTypeId" name="literatureTypeId" class="form-control" type="text">
+				<label class="col-sm-3 control-label">文献类目：</label>
+				<div class="col-xs-8">
+					<label th:each="literaturetype:${literaturetype}" class="check-box">
+						<input name="literatureTypeId" type="checkbox" th:value="${literaturetype.typeId}" th:text="${literaturetype.typeName}" >
+					</label>
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">文献作者ID：</label>
-				<div class="col-sm-8">
-					<input id="literatureAuthorId" name="literatureAuthorId" class="form-control" type="text">
+				<label class="col-sm-3 control-label">文献作者：</label>
+				<div class="col-xs-8">
+					<label th:each="author:${author}" class="check-box">
+						<input name="literatureAuthorId" type="checkbox" th:value="${author.authorId}" th:text="${author.authorName}" >
+					</label>
 				</div>
 			</div>
 			<div class="form-group">	

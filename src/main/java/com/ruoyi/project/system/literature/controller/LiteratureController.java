@@ -6,8 +6,12 @@ import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.system.author.domain.Author;
+import com.ruoyi.project.system.author.service.IAuthorService;
 import com.ruoyi.project.system.literature.domain.Literature;
 import com.ruoyi.project.system.literature.service.ILiteratureService;
+import com.ruoyi.project.system.literaturetype.domain.Literaturetype;
+import com.ruoyi.project.system.literaturetype.service.ILiteraturetypeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,12 +34,18 @@ public class LiteratureController extends BaseController
 	
 	@Autowired
 	private ILiteratureService literatureService;
+	@Autowired
+	private ILiteraturetypeService literaturetypeService;
+	@Autowired
+	private IAuthorService authorService;
 	
 	@RequiresPermissions("lms:literature:view")
 	@GetMapping()
-	public String literature()
+	public String literature(ModelMap mmap)
 	{
-	    return prefix + "/literature";
+		mmap.put("literaturetype", literaturetypeService.selectLiteraturetypeList(new Literaturetype()));
+		mmap.put("author", authorService.selectAuthorList(new Author()));
+		return prefix + "/literature";
 	}
 	
 	/**
@@ -69,8 +79,10 @@ public class LiteratureController extends BaseController
 	 * 新增文献
 	 */
 	@GetMapping("/add")
-	public String add()
+	public String add(ModelMap mmap)
 	{
+		mmap.put("literaturetype", literaturetypeService.selectLiteraturetypeList(new Literaturetype()));
+		mmap.put("author", authorService.selectAuthorList(new Author()));
 	    return prefix + "/add";
 	}
 	
@@ -93,6 +105,8 @@ public class LiteratureController extends BaseController
 	public String edit(@PathVariable("literatureId") Integer literatureId, ModelMap mmap)
 	{
 		Literature literature = literatureService.selectLiteratureById(literatureId);
+		mmap.put("literaturetype", literaturetypeService.selectLiteraturetypeList(new Literaturetype()));
+		mmap.put("author", authorService.selectAuthorList(new Author()));
 		mmap.put("literature", literature);
 	    return prefix + "/edit";
 	}
