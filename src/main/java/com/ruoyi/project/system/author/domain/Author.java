@@ -20,7 +20,7 @@ public class Author extends BaseEntity
 	private Integer authorId;
 	/** 作者名称 */
 	private String authorName;
-	/** authorCreateTime */
+	/** zuoz*/
 	private String anthorSynopsis;
 	/** 作者创建时间 */
 	private Date authorCreateTime;
