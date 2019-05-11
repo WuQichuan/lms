@@ -31,7 +31,7 @@ public class AuthorController extends BaseController
 	@Autowired
 	private IAuthorService authorService;
 	
-	@RequiresPermissions("lms:author:view")
+
 	@GetMapping()
 	public String author()
 	{
@@ -41,7 +41,7 @@ public class AuthorController extends BaseController
 	/**
 	 * 查询作者列表
 	 */
-	@RequiresPermissions("lms:author:list")
+
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(Author author)
@@ -55,7 +55,7 @@ public class AuthorController extends BaseController
 	/**
 	 * 导出作者列表
 	 */
-	@RequiresPermissions("lms:author:export")
+
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Author author)
@@ -77,7 +77,7 @@ public class AuthorController extends BaseController
 	/**
 	 * 新增保存作者
 	 */
-	@RequiresPermissions("lms:author:add")
+
 	@Log(title = "作者", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
@@ -100,7 +100,7 @@ public class AuthorController extends BaseController
 	/**
 	 * 修改保存作者
 	 */
-	@RequiresPermissions("lms:author:edit")
+
 	@Log(title = "作者", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
@@ -112,13 +112,18 @@ public class AuthorController extends BaseController
 	/**
 	 * 删除作者
 	 */
-	@RequiresPermissions("lms:author:remove")
+
 	@Log(title = "作者", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{		
-		return toAjax(authorService.deleteAuthorByIds(ids));
+	{
+		if(authorService.checkDeleteAuthor(Integer.parseInt(ids))){
+			return toAjax(authorService.deleteAuthorByIds(ids));
+		}else{
+			return AjaxResult.warn("该作者下存才文献，不允许删除");
+		}
+
 	}
 	
 }

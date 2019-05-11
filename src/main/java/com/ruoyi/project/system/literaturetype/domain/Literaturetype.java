@@ -51,7 +51,9 @@ public class Literaturetype extends BaseEntity
 		return typeCreateTime;
 	}
 
-    public String toString() {
+
+
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("typeId", getTypeId())
             .append("typeName", getTypeName())

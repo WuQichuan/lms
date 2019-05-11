@@ -25,6 +25,7 @@ public class Author extends BaseEntity
 	/** 作者创建时间 */
 	private Date authorCreateTime;
 
+
 	public void setAuthorId(Integer authorId) 
 	{
 		this.authorId = authorId;
@@ -62,7 +63,9 @@ public class Author extends BaseEntity
 		return authorCreateTime;
 	}
 
-    public String toString() {
+
+
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("authorId", getAuthorId())
             .append("authorName", getAuthorName())

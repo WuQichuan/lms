@@ -51,5 +51,12 @@ public interface IAuthorService
      * @return 结果
      */
 	public int deleteAuthorByIds(String ids);
-	
+
+	/**
+	 * 检查删除作者
+	 *
+	 * @param authorID 需要删除的作者ID
+	 * @return 结果
+	 */
+	public Boolean checkDeleteAuthor(Integer authorID);
 }

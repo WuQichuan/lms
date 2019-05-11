@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectLiteratureVo"/>
         <where>  
             <if test="literatureId != null "> and literatureId = #{literatureId}</if>
-             <if test="literatureTitle != null  and literatureTitle != '' "> and literatureTitle = #{literatureTitle}</if>
+             <if test="literatureTitle != null  and literatureTitle != '' "> and literatureTitle like CONCAT('%',#{literatureTitle},'%')</if>
              <if test="literatureTypeId != null "> and literatureTypeId = #{literatureTypeId}</if>
              <if test="literatureAuthorId != null "> and literatureAuthorId = #{literatureAuthorId}</if>
              <if test="literatureContent != null  and literatureContent != '' "> and literatureContent like CONCAT('%',#{literatureContent},'%')</if>
@@ -49,6 +49,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectLiteratureVo"/>
         where literatureId = #{literatureId}
     </select>
+
+    <select id="checkDeleteType" parameterType="Integer" resultType="Integer">
+        select count(*) from tb_literature where literatureTypeId = #{literatureTypeId}
+    </select>
+
+    <select id="checkDeleteAuthor" parameterType="Integer" resultType="Integer">
+        select count(*) from tb_literature where literatureAuthorId = #{literatureAuthorId}
+    </select>
+
         
     <insert id="insertLiterature" parameterType="Literature" useGeneratedKeys="true" keyProperty="literatureId">
         insert into tb_literature

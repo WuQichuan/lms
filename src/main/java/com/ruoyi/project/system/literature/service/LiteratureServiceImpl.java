@@ -79,5 +79,26 @@ public class LiteratureServiceImpl implements ILiteratureService
 	{
 		return literatureMapper.deleteLiteratureByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public Boolean checkLiterature(Literature literature) {
+		if(literature.getLiteratureTitle() == null){
+			return false;
+		}
+
+		if(literature.getLiteratureTypeId() == null){
+			return false;
+		}
+		if(literature.getLiteratureContent() == null){
+			return false;
+		}
+		if(literature.getLiteratureAuthorId() == null){
+			return false;
+		}
+		if(literature.getLiteratureCreateTime()== null){
+			return false;
+		}
+		return true;
+	}
+
 }

@@ -33,18 +33,15 @@
 			</div>
 			
 	        <div class="btn-group-sm" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="lms:author:add">
+				<a class="btn btn-success" onclick="$.operate.add()" >
 					<i class="fa fa-plus"></i> 添加
 				</a>
-				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="lms:author:edit">
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" >
 					<i class="fa fa-edit"></i> 修改
 				</a>
-				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="lms:author:remove">
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()">
 					<i class="fa fa-remove"></i> 删除
 				</a>
-				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="lms:author:export">
-						<i class="fa fa-download"></i> 导出
-				 </a>
 			</div>
 			<div class="col-sm-12 select-table table-striped">
 				<table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -53,8 +50,8 @@
 	</div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('lms:author:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('lms:author:remove')}]];
+        var editFlag = [];
+        var removeFlag = [];
         var prefix = ctx + "lms/author";
 
         $(function() {
@@ -81,7 +78,7 @@
 				},
 				{
 					field : 'anthorSynopsis', 
-					title : 'authorCreateTime',
+					title : '作者简介',
 					sortable: true
 				},
 				{

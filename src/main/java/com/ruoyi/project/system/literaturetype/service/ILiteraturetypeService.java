@@ -51,5 +51,13 @@ public interface ILiteraturetypeService
      * @return 结果
      */
 	public int deleteLiteraturetypeByIds(String ids);
+
+	/**
+	 * 批量删除文献
+	 *
+	 * @param literatureTypeId 需要删除的文献类目ID
+	 * @return 结果
+	 */
+	public Boolean checkDelete(Integer literatureTypeId);
 	
 }

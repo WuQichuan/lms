@@ -59,5 +59,21 @@ public interface LiteratureMapper
      * @return 结果
      */
 	public int deleteLiteratureByIds(String[] literatureIds);
+
+	/**
+	 * 检查删除文献类目
+	 *
+	 * @param literatureTypeId 需要删除的文献类目ID
+	 * @return 结果
+	 */
+	public int checkDeleteType(Integer literatureTypeId);
+
+	/**
+	 * 检查删除作者
+	 *
+	 * @param authorID 需要删除的作者ID
+	 * @return 结果
+	 */
+	public int checkDeleteAuthor(Integer authorID);
 	
 }

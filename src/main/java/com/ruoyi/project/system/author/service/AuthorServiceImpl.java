@@ -3,6 +3,7 @@ package com.ruoyi.project.system.author.service;
 import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.project.system.author.domain.Author;
 import com.ruoyi.project.system.author.mapper.AuthorMapper;
+import com.ruoyi.project.system.literature.mapper.LiteratureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class AuthorServiceImpl implements IAuthorService
 {
 	@Autowired
 	private AuthorMapper authorMapper;
+
+	@Autowired
+	private LiteratureMapper literatureMapper;
 
 	/**
      * 查询作者信息
@@ -79,5 +83,19 @@ public class AuthorServiceImpl implements IAuthorService
 	{
 		return authorMapper.deleteAuthorByIds(Convert.toStrArray(ids));
 	}
-	
+
+	/**
+	 * 检查删除作者
+	 *
+	 * @param authorID 需要删除的作者ID
+	 * @return 结果
+	 */
+	@Override
+	public Boolean checkDeleteAuthor(Integer authorID){
+		if(literatureMapper.checkDeleteAuthor(authorID) > 0){
+			return false;
+		}else {
+			return true;
+		}
+	}
 }

@@ -39,7 +39,7 @@ public class LiteratureController extends BaseController
 	@Autowired
 	private IAuthorService authorService;
 	
-	@RequiresPermissions("lms:literature:view")
+
 	@GetMapping()
 	public String literature(ModelMap mmap)
 	{
@@ -51,7 +51,7 @@ public class LiteratureController extends BaseController
 	/**
 	 * 查询文献列表
 	 */
-	@RequiresPermissions("lms:literature:list")
+
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(Literature literature)
@@ -65,7 +65,7 @@ public class LiteratureController extends BaseController
 	/**
 	 * 导出文献列表
 	 */
-	@RequiresPermissions("lms:literature:export")
+
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Literature literature)
@@ -89,13 +89,19 @@ public class LiteratureController extends BaseController
 	/**
 	 * 新增保存文献
 	 */
-	@RequiresPermissions("lms:literature:add")
+
 	@Log(title = "文献", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(Literature literature)
-	{		
-		return toAjax(literatureService.insertLiterature(literature));
+	{
+
+		if(literatureService.checkLiterature(literature)){
+			return toAjax(literatureService.insertLiterature(literature));
+		}else{
+			return AjaxResult.warn("文献内容不合规，保存失败，请重新填写");
+		}
+
 	}
 
 	/**
@@ -114,19 +120,24 @@ public class LiteratureController extends BaseController
 	/**
 	 * 修改保存文献
 	 */
-	@RequiresPermissions("lms:literature:edit")
+
 	@Log(title = "文献", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(Literature literature)
-	{		
-		return toAjax(literatureService.updateLiterature(literature));
+	{
+		if(literatureService.checkLiterature(literature)){
+			return toAjax(literatureService.updateLiterature(literature));
+		}else{
+			return AjaxResult.warn("文献内容不合规，保存失败，请重新填写");
+		}
+
 	}
 	
 	/**
 	 * 删除文献
 	 */
-	@RequiresPermissions("lms:literature:remove")
+
 	@Log(title = "文献", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody

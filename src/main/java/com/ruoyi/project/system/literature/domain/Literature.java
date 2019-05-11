@@ -29,6 +29,7 @@ public class Literature extends BaseEntity
 	private String literatureContent;
 	/** 文献创建时间 */
 	private Date literatureCreateTime;
+
 	/** 文献状态 */
 	private Integer literatureStatus;
 
@@ -98,7 +99,9 @@ public class Literature extends BaseEntity
 		this.literatureStatus = literatureStatus;
 	}
 
-	public Integer getLiteratureStatus() 
+
+
+	public Integer getLiteratureStatus()
 	{
 		return literatureStatus;
 	}

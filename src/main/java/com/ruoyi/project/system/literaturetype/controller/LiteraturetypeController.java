@@ -31,7 +31,7 @@ public class LiteraturetypeController extends BaseController
 	@Autowired
 	private ILiteraturetypeService literaturetypeService;
 	
-	@RequiresPermissions("lms:literaturetype:view")
+
 	@GetMapping()
 	public String literaturetype()
 	{
@@ -41,7 +41,7 @@ public class LiteraturetypeController extends BaseController
 	/**
 	 * 查询文献类目列表
 	 */
-	@RequiresPermissions("lms:literaturetype:list")
+
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(Literaturetype literaturetype)
@@ -55,7 +55,7 @@ public class LiteraturetypeController extends BaseController
 	/**
 	 * 导出文献类目列表
 	 */
-	@RequiresPermissions("lms:literaturetype:export")
+
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Literaturetype literaturetype)
@@ -77,7 +77,7 @@ public class LiteraturetypeController extends BaseController
 	/**
 	 * 新增保存文献类目
 	 */
-	@RequiresPermissions("lms:literaturetype:add")
+
 	@Log(title = "文献类目", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
@@ -100,7 +100,7 @@ public class LiteraturetypeController extends BaseController
 	/**
 	 * 修改保存文献类目
 	 */
-	@RequiresPermissions("lms:literaturetype:edit")
+
 	@Log(title = "文献类目", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
@@ -112,13 +112,18 @@ public class LiteraturetypeController extends BaseController
 	/**
 	 * 删除文献类目
 	 */
-	@RequiresPermissions("lms:literaturetype:remove")
+
 	@Log(title = "文献类目", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
 	{		
-		return toAjax(literaturetypeService.deleteLiteraturetypeByIds(ids));
+		if(literaturetypeService.checkDelete(Integer.parseInt(ids))){
+			return toAjax(literaturetypeService.deleteLiteraturetypeByIds(ids));
+		}else{
+			return AjaxResult.warn("该文献类目下存才文献，不允许删除");
+		}
+
 	}
 	
 }

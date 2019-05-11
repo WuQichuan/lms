@@ -51,5 +51,13 @@ public interface ILiteratureService
      * @return 结果
      */
 	public int deleteLiteratureByIds(String ids);
+
+	/**
+	 * 检查文献信息
+	 *
+	 * @param literature literature
+	 * @return 结果
+	 */
+	public Boolean checkLiterature(Literature literature);
 	
 }
