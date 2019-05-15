@@ -116,6 +116,9 @@ public class UserController extends BaseController
         {
             return error("不允许修改超级管理员用户");
         }
+        Integer ids = 2;
+        Long[] id  = {ids.longValue()};
+        user.setRoleIds(id);
         return toAjax(userService.insertUser(user));
     }
 

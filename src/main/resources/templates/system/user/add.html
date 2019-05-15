@@ -19,15 +19,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>归属部门：</label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                            	<input name="deptName" onclick="selectDeptTree()" id="treeName" type="text" placeholder="请选择归属部门" class="form-control" required>
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="row">
@@ -80,54 +72,20 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">用户状态：</label>
-                        <div class="col-sm-8">
-                            <div class="onoffswitch">
-		                         <input type="checkbox" th:checked="true" class="onoffswitch-checkbox" id="status">
-		                         <label class="onoffswitch-label" for="status">
-		                             <span class="onoffswitch-inner"></span>
-		                             <span class="onoffswitch-switch"></span>
-		                         </label>
-		                     </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="row">
             	<div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">岗位：</label>
-                        <div class="col-xs-4">
-                            <select id="post" class="form-control select2-hidden-accessible" multiple="">
-								<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:disabled="${post.status == '1'}"></option>
-							</select>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="row">
             	<div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">角色：</label>
-                        <div class="col-xs-10">
-                            <label th:each="role:${roles}" class="check-box">
-								<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}">
-							</label>
-                        </div>
-                    </div>
+
                 </div>
             </div>
-            <h4 class="form-header h4">其他信息</h4>
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">备注：</label>
-                        <div class="col-xs-10">
-                            <textarea name="remark" autocomplete="off" maxlength="500" class="form-control" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </form>
     </div>
@@ -226,19 +184,7 @@
 	        }
 	    }
          
-        /*用户管理-新增-选择部门树*/
-        function selectDeptTree() {
-        	var treeId = $("#treeId").val();
-        	var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
-        	var url = ctx + "system/dept/selectDeptTree/" + deptId;
-			var options = {
-				title: '选择部门',
-				width: "380",
-				url: ctx + "system/dept/selectDeptTree/" + deptId,
-				callBack: doSubmit
-			};
-			$.modal.openOptions(options);
-		}
+
 		
 		function doSubmit(index, layero){
 			var tree = layero.find("iframe")[0].contentWindow.$._tree;
