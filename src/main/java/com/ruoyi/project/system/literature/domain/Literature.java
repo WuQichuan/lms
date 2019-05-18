@@ -31,7 +31,7 @@ public class Literature extends BaseEntity
 	private Date literatureCreateTime;
 
 	/** 文献状态 */
-	private Integer literatureStatus;
+	private String literatureStatus;
 
 	//以下为查询使用的冗余字段
 	/** 文献类目名称 */
@@ -94,14 +94,14 @@ public class Literature extends BaseEntity
 	{
 		return literatureCreateTime;
 	}
-	public void setLiteratureStatus(Integer literatureStatus) 
+	public void setLiteratureStatus(String literatureStatus)
 	{
 		this.literatureStatus = literatureStatus;
 	}
 
 
 
-	public Integer getLiteratureStatus()
+	public String getLiteratureStatus()
 	{
 		return literatureStatus;
 	}

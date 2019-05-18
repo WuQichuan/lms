@@ -35,7 +35,7 @@
 							</li>
 
 							<li>
-								文献状态：<input type="text" name="literatureStatus"/>
+								文献状态/备注：<input type="text" name="literatureStatus"/>
 							</li>
 
 							<li>
@@ -51,12 +51,7 @@
 				<a class="btn btn-success" onclick="$.operate.add()">
 					<i class="fa fa-plus"></i> 添加
 				</a>
-				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()">
-					<i class="fa fa-edit"></i> 修改
-				</a>
-				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()">
-					<i class="fa fa-remove"></i> 删除
-				</a>
+
 
 			</div>
 			<div class="col-sm-12 select-table table-striped">
@@ -109,7 +104,7 @@
 				},
 				{
 					field : 'literatureStatus', 
-					title : '文献状态',
+					title : '文献状态/备注',
 					sortable: true
 				},
 		        {
